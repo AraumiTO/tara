@@ -1,0 +1,30 @@
+on: [push, pull_request]
+name: Test
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: Install Nightly Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rustfmt
+
+      - name: Cache Cargo output
+        uses: Swatinem/rust-cache@v2
+
+      - name: Check formatting
+        run: cargo +nightly fmt --all -- --check
+
+      - name: Run clippy
+        run: cargo +stable clippy --all --all-features --tests
+
+      - name: Run tests
+        run: cargo +stable test --all --locked

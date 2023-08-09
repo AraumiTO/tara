@@ -1,0 +1,10 @@
+# JetBrains IDE
+/.idea
+
+# Build artifacts
+/target
+
+# Secrets
+.env
+
+/logs

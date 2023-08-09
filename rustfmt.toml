@@ -1,0 +1,5 @@
+tab_spaces = 2
+imports_granularity = "Crate"
+group_imports = "StdExternalCrate"
+trailing_comma = "Never"
+overflow_delimited_expr = true
